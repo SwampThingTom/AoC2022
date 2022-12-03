@@ -3,7 +3,11 @@
   
   Part 1
   Find the common letter in both halves of a string.
-  Sum their numerical values across all strings. }
+  Sum their numerical values across all strings. 
+  
+  Part 2
+  Find the common letter across three strings.
+  Sum their numerical values across all groups of three strings. }
 
 Program RucksackReorg;
 
@@ -13,7 +17,7 @@ Uses StrUtils;
 Type
   TRucksack = string;
   TRucksacks = array of TRucksack;
-  TCompartment = set of char;
+  TItemSet = set of char;
 
 
 { Read rucksacks from file. Each rucksack is a string. }
@@ -59,28 +63,27 @@ Begin
 End;
 
 
-{ Return a set of characters containing all of the characters in the 
-  compartment string. }
-Function CompartmentSet(compartment : string) : TCompartment;
+{ Return a set of characters containing all of the characters in items. }
+Function ItemSet(items : string) : TItemSet;
 Var
   ch : char;
 Begin
-  CompartmentSet := [];
-  For ch In compartment Do
-    CompartmentSet := CompartmentSet + [ch];
+  ItemSet := [];
+  For ch In items Do
+    ItemSet := ItemSet + [ch];
 End;
 
 
-{ Return the first item in the compartment.
+{ Return the first item in the items set.
 
   Set handling in Pascal appears to be quite limited. This is a bit of a hack
   since I couldn't quickly find a way to get an iterator for a set and get the
   next (first) item. }
-Function FirstItem(compartment: TCompartment) : char;
+Function FirstItem(items: TItemSet) : char;
 Var
   ch : char;
 Begin
-  For ch In compartment Do
+  For ch In items Do
     Exit(ch);
 End;
 
@@ -100,20 +103,20 @@ End;
 Function Priority(sack : TRucksack) : integer;
 Var
   compartmentLength : integer;
-  leftCompartment : TCompartment;
-  rightCompartment : TCompartment;
-  common : TCompartment;
+  leftCompartment : TItemSet;
+  rightCompartment : TItemSet;
+  common : TItemSet;
 Begin
   compartmentLength := Trunc(Length(sack)/2);
-  leftCompartment := CompartmentSet(LeftStr(sack, compartmentLength));
-  rightCompartment := CompartmentSet(RightStr(sack, compartmentLength));
+  leftCompartment := ItemSet(LeftStr(sack, compartmentLength));
+  rightCompartment := ItemSet(RightStr(sack, compartmentLength));
 
   common := leftCompartment * rightCompartment;
   Priority := ItemPriority(FirstItem(common));
 End;
 
 
-{ Returns the sum of the priorities of all rucksacks. }
+{ Part 1: Returns the sum of the priorities of all rucksacks. }
 Function SumOfPriorities(rucksacks : TRucksacks) : integer;
 Var
   sack : string;
@@ -126,12 +129,43 @@ Begin
 End;
 
 
+{ Returns the priority of the item that is common across all three sacks. }
+Function BadgeForGroup(sack1, sack2, sack3 : TRucksack) : integer;
+Var
+  common : TItemSet;
+Begin
+  common := ItemSet(sack1) * ItemSet(sack2) * ItemSet(sack3);
+  BadgeForGroup := ItemPriority(FirstItem(common));
+End;
+
+
+{ Part 2: Returns the sum of the priorities of all groups' badges. }
+Function SumOfBadges(rucksacks : TRucksacks) : integer;
+Var
+  sack : integer;
+Begin
+  SumOfBadges := 0;
+  sack := 0;
+  While sack < Length(rucksacks) Do
+    Begin
+      SumOfBadges := SumOfBadges + BadgeForGroup(
+        rucksacks[sack], 
+        rucksacks[sack+1], 
+        rucksacks[sack+2]);
+      sack := sack + 3;
+    End;
+End;
+
+
 Var 
   rucksacks : TRucksacks;
-  priorities : integer;
+  result : integer;
 
 Begin
   rucksacks := GetRucksacks();
-  priorities := SumOfPriorities(rucksacks);
-  WriteLn('Part 1: ', priorities);
+  result := SumOfPriorities(rucksacks);
+  WriteLn('Part 1: ', result);
+
+  result := SumOfBadges(rucksacks);
+  WriteLn('Part 2: ', result)
 End.
