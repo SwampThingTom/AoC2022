@@ -18,7 +18,7 @@ Pretty sure the only reason I decided to do it in assembly was just to see if I 
 ### How It Went
 
 Today's puzzle was very well suited to 6502 assembly.
-It only required summing 8-bit integers and the final result (for part 1 anyway) fit in 16-bits.
+It only required summing 8-bit integers and the final result fit in 16-bits.
 
 For the input data, I briefly considered investigating how to read a file use the Commodore 64 KERNAL (sic) functions.
 But I realized I wanted to spend my time solving the actual puzzle rather than navigating the intricacies of reading and parsing files in assembly code.
@@ -30,6 +30,8 @@ That worked for the simple example given in the puzzle's text which had only thr
 However it went into an infinite loop when I tried to run it on my actual input.
 I pretty quickly realized that the actual input had way more than 128 games which is the most I could handle in an 8-bit register.
 Fixed it by using a zero-page address to hold a pointer to the next piece of game data and accessed it indirectly through that.
+
+For part 2, I simply created a new table of scores for each combination and use a zeropage pointer to specify which table to use.
 
 ### Tools
 
@@ -60,7 +62,7 @@ If you want to use your own input file, download it to a file named "input.txt" 
 scripts/convert_input.py
 ```
 
-That will overwrite the `input.asm` file so when you run the program it uses that input.
+That will overwrite the `input.asm` file so when you reassemble and run the program, it uses that input.
 
 ### Screenshot
 
