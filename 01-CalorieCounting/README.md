@@ -27,4 +27,12 @@ I certainly wouldn't reach for BASIC as my first tool for most programming proje
 
 ### Tools
 
-[Chipmunk BASIC](http://www.nicholson.com/rhn/basic/) for MacOS
+[Chipmunk BASIC](http://www.nicholson.com/rhn/basic/)
+
+### Running
+
+After installing Chipmunk BASIC and ensuring it is in your PATH, simply run:
+
+```
+./CalorieCounting
+```

@@ -30,3 +30,9 @@ As much as I loved Pascal at the time, and still appreciate its strong typing an
 ### Tools
 
 [Free Pascal](https://freepascal.org)
+
+### Running
+
+```
+make && build/RucksackReorg
+```

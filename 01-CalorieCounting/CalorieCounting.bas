@@ -1,3 +1,5 @@
+#!/usr/bin/env basic
+
 10 rem Calorie Counting
 20 rem https://adventofcode.com/2022/day/1
 30 rem

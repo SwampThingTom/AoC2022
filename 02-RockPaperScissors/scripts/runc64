@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Assemble and run 6502 program in VICE.
 # USAGE: runc64 <file>
 

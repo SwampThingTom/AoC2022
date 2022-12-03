@@ -38,7 +38,9 @@ For part 2, I simply created a new table of scores for each combination and use 
 - [ACME Cross Assembler](https://github.com/meonwax/acme/) 
 - [VICE](https://vice-emu.sourceforge.io/) Commodore 64 emulator
 
-If you want to try running this yourself, here's what you'll need.
+### Running
+
+Install the tools mentioned above.
 
 1. Install Acme. The easiest way to do this is using Homebrew:
 `brew install acme`
@@ -54,7 +56,7 @@ If you just want to build and run the program, type:
 scripts/runc64 RockPaperScissors
 ```
 
-That will use Acme to assemble the source, convert it to a d64 file, and open VICE to run it.
+That will use Acme to assemble the source, convert the resulting object code to a d64 file, and open it in VICE to run it.
 
 If you want to use your own input file, download it to a file named "input.txt" and then type:
 
