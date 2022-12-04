@@ -8,4 +8,5 @@ The years after each language are approximately when I was actively using it.
 
 Day 1: BASIC (1978-1985)\
 Day 2: 6502 Assembly (1982-1986)\
-Day 3: Pascal (1984-1989)
+Day 3: Pascal (1984-1989)\
+Day 4: C (1986-2005+)
