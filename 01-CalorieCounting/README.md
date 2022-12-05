@@ -34,5 +34,7 @@ I certainly wouldn't reach for BASIC as my first tool for most programming proje
 After installing Chipmunk BASIC and ensuring it is in your PATH, simply run:
 
 ```
-./CalorieCounting
+./CalorieCounting.bas
 ```
+
+After it runs, you'll have to `quit` out of Chipmunk BASIC's REPL.
