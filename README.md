@@ -12,4 +12,5 @@ Day 3: Pascal (1984-1989)\
 Day 4: C (1986-2005+)\
 Day 5: Lisp (1987-1990)\
 Day 6: Smalltalk (1988)\
-Day 7: Rexx (1988-1993)
+Day 7: Rexx (1988-1993)\
+Day 8: BASH (1991-present)
