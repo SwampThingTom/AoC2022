@@ -10,6 +10,7 @@ get_abs_filename() {
 
 mkdir -p build
 rm -rf build/*
+scripts/convert_input.py
 acme --format cbm --outfile build/$1.prg $1.asm || exit 1
 prg=$(get_abs_filename build/$1.prg)
 c1541 -format default,lodis d64 build/$1.d64 -write "$prg" 
