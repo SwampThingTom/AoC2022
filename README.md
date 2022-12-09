@@ -10,8 +10,8 @@ Day 1: BASIC (1978-1985)\
 Day 2: 6502 Assembly (1982-1986)\
 Day 3: Pascal (1984-1989)\
 Day 4: C (1986-2005+)\
-Day 5: Lisp (1987-1990)\
+Day 5: Lisp (1988-1990)\
 Day 6: Smalltalk (1988)\
 Day 7: Rexx (1988-1993)\
-Day 8: BASH (1991-present)\
+Day 8: BASH (1990-present)\
 Day 9: Ada (1990-2007)
