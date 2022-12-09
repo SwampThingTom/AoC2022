@@ -19,12 +19,22 @@ This is the first language I've used in AoC so far that I still use today, both 
 
 ### How It Went
 
-For part 1, just iterated over each row and column in both directions, adding the tree to an associative array of trees that have been seen.
+For part 1, just iterate over each row and column in both directions, adding trees that can be seen to an associative array.
 Easy peasy.
+
+With the ability to easily iterate over the grid in any direction from part 1, part 2 wasn't bad either.
+BASH's use of pipes to return values from functions makes the syntax of calling the function that calculates the scenic value for a tree a bit odd but since I'm used to it, it was easy to code.
+
+Comparing scripting languages, BASH's syntax is terrible compared to Rexx.
+Looking at the code, I'd be hard pressed to find an easy way to explain what it's doing to someone who isn't already familiar with BASH.
+But BASH has real arrays and associative arrays which makes it much easier to model problems like this one (if you are familiar with the syntax).
+
+Overall neither language is ideal for AoC puzzles.
+For the kinds of problems I use scripting languages for, I prefer Rexx's syntax but Bash is ubiquitous, has better data structures, and, at this point, I'm familiar enough with the syntax that I can write it pretty quickly.
 
 ### Tools
 
-[GNU Bash](https://tiswww.case.edu/php/chet/bash/bashtop.html)
+[GNU BASH](https://tiswww.case.edu/php/chet/bash/bashtop.html)
 
 ### Running
 

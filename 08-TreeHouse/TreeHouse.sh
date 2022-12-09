@@ -80,3 +80,67 @@ for (( x=1; x<$((map_width-1)); x++ )); do
 done
 
 echo "Part 1: ${#visible_trees[@]}"
+
+#
+# Part 2: Find most scenic tree.
+#
+
+calc_scenic() {
+    this_height=${tree_map[$2]:$1:1}
+
+    # Look north.
+    trees_seen_n=0
+    for (( y=$(($2-1)); y>=0; y-- )); do
+        trees_seen_n=$((trees_seen_n+1))
+        other_height=${tree_map[$y]:$1:1}
+        if [ $other_height -ge $this_height ]; then
+            break
+        fi
+    done
+
+    # Look south.
+    trees_seen_s=0
+    for (( y=$(($2+1)); y<=$((map_width-1)); y++ )); do
+        trees_seen_s=$((trees_seen_s+1))
+        other_height=${tree_map[$y]:$1:1}
+        if [ $other_height -ge $this_height ]; then
+            break
+        fi
+    done
+
+    # Look east.
+    trees_seen_e=0
+    for (( x=$(($1+1)); x<=$((map_width-1)); x++ )); do
+        trees_seen_e=$((trees_seen_e+1))
+        other_height=${tree_map[$2]:$x:1}
+        if [ $other_height -ge $this_height ]; then
+            break
+        fi
+    done
+
+    # Look west.
+    trees_seen_w=0
+    for (( x=$(($1-1)); x>=0; x-- )); do
+        trees_seen_w=$((trees_seen_w+1))
+        other_height=${tree_map[$2]:$x:1}
+        if [ $other_height -ge $this_height ]; then
+            break
+        fi
+    done
+
+    echo $((trees_seen_n * trees_seen_e * trees_seen_s * trees_seen_w))
+}
+
+# Find the highest scenic value for all trees.
+# Trees along the edges always have a scenic value of 0 so ignore them.
+most_scenic=0
+for (( y=1; y<$((map_height-1)); y++ )); do
+    for (( x=1; x<$((map_width-1)); x++ )); do
+        scenic=$(calc_scenic $x $y)
+        if [ $scenic -gt $most_scenic ]; then
+            most_scenic=$scenic
+        fi
+    done
+done
+
+echo "Part 2: $most_scenic"
