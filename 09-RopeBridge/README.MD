@@ -28,9 +28,14 @@ That said, I have heard that more recent versions of Ada have addressed some of 
 That's a lot of code just to store a coordinate in a set.
 And writing the hash function was painful because I kept getting integer overflows.
 Also having to specify the function name both in the declaration AND in the `end` statement is no fun.
-But part 1 works.
+But I got part 1 working without too much trouble.
 
-Need to make it more generic for part 2.
+Part 2 required a smaller refactor than I had expected at first glance.
+Just kept an array of knots and update all of them instead of just a head and tail.
+
+Overall I think this was a good problem to do in Ada.
+Honestly the hardest part was having to implement a hash function for my set type.
+Beyond that it was just slow to implement because I had to remember (google) syntax for a language I haven't used in over 15 years.
 
 ### Tools
 

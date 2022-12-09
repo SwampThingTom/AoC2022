@@ -34,6 +34,8 @@ procedure RopeBridge is
       Equivalent_Elements => Equivalent_Points);
    use Point_Sets;
 
+   type Knot_Array is array (Count_Type range <>) of Point;
+
    --
    -- A direction and distance to move.
    --
@@ -58,8 +60,7 @@ procedure RopeBridge is
    procedure Move(
       move : Instruction;
       tail_locations : in out Set;
-      head : in out Point;
-      tail : in out Point) is
+      knots : in out Knot_Array) is
 
       function Sign(x : Integer) return Integer is
       begin
@@ -89,36 +90,52 @@ procedure RopeBridge is
       for i in 1 .. move.distance loop
          case move.direction is
             when 'U' =>
-               head.y := head.y - 1;
+               knots(knots'First).y := knots(knots'First).y - 1;
             when 'D' =>
-               head.y := head.y + 1;
+               knots(knots'First).y := knots(knots'First).y + 1;
             when 'L' =>
-               head.x := head.x - 1;
+               knots(knots'First).x := knots(knots'First).x - 1;
             when 'R' =>
-               head.x := head.x + 1;
+               knots(knots'First).x := knots(knots'First).x + 1;
             when others =>
                raise Constraint_Error;
          end case;
-         Move_Tail(head, tail);
-         tail_locations.Include(tail);
+
+         for knot_index in knots'First .. knots'Last - 1 loop
+            Move_Tail(knots(knot_index), knots(knot_index+1));
+         end loop;
+         
+         tail_locations.Include(knots(knots'Last));
       end loop;
    end Move;
 
-   --
-   -- Variables
-   --
-   tail_locations : Set;
-   head : Point := (x => 0, y => 0);
-   tail : Point := (x => 0, y => 0);
-   file : File_Type;
-   line : Unbounded_String;
+   function Solve(knot_count : Count_Type) return Count_Type is
+      knots : Knot_Array (1 .. knot_count) := (others => (x => 0, y => 0));
+      tail_locations : Set;
+      file : File_Type;
+      line : Unbounded_String;
+   begin
+      -- Add the starting location of tail.
+      tail_locations.Insert(knots(knots'Last));
+
+      -- Read each line from the file and use it to move the rope.
+      Open(file, in_file, "input.txt");
+      loop
+         exit when End_of_File(file);
+         Get_Line(file, line);
+         Move(Parse_Instruction(to_string(line)), tail_locations, knots);
+      end loop;
+      Close(file);
+
+      -- Return the number of locations that the tail has visited.
+      return Length(tail_locations);
+   end Solve;
+
+   result : Count_Type;
 begin
-   tail_locations.Insert(tail);
-   Open(file, in_file, "input.txt");
-   loop
-      exit when End_of_File(file);
-      Get_Line(file, line);
-      Move(Parse_Instruction(to_string(line)), tail_locations, head, tail);
-   end loop;
-   Put_Line("Part 1: " & Count_Type'Image(Length(tail_locations)));
+   result := Solve(2);
+   Put_Line("Part 1: " & Count_Type'Image(result));
+
+   result := Solve(10);
+   Put_Line("Part 2: " & Count_Type'Image(result));
 end RopeBridge;
