@@ -3,18 +3,23 @@
 # Treetop Tree House
 # https://adventofcode.com/2022/day/8
 
-declare -A trees_seen=()
+declare -A visible_trees=()
 
 add_tree() {
-    trees_seen["$1,$2"]=1
+    visible_trees["$1,$2"]=1
 }
 
+# Read the input.
 map_height=0
 while IFS= read -r line; do
     tree_map[$map_height]=$line
     map_height=$((map_height+1))
 done < input.txt
 map_width=${#tree_map[0]}
+
+#
+# Part 1: Find visible trees.
+#
 
 # Add edges to trees seen.
 for (( x=0; x<$map_width; x++ )); do
@@ -74,4 +79,4 @@ for (( x=1; x<$((map_width-1)); x++ )); do
     done
 done
 
-echo "Part 1: ${#trees_seen[@]}"
+echo "Part 1: ${#visible_trees[@]}"
