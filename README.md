@@ -14,4 +14,5 @@ Day 5: Lisp (1988-1990)\
 Day 6: Smalltalk (1988)\
 Day 7: Rexx (1988-1993)\
 Day 8: BASH (1990-present)\
-Day 9: Ada (1990-2007)
+Day 9: Ada (1990-2007)\
+Day 10: C++ (1991-2005,2020-present)
