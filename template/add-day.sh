@@ -10,7 +10,7 @@ language=$2
 
 target_dir="$day-TBD"
 
-day_num=`expr $day + 0`rm
+day_num=`expr $day + 0`
 mkdir $target_dir
 cp template/README.MD $target_dir
 sed -i '' "s/<day>/$day_num/g" $target_dir/README.md
