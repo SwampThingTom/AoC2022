@@ -1,3 +1,6 @@
+// Cathode-Ray Tube
+// https://adventofcode.com/2022/day/10
+
 #include <array>
 #include <fstream>
 #include <iostream>
