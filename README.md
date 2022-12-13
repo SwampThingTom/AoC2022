@@ -15,5 +15,6 @@ Day 6: Smalltalk (1988)\
 Day 7: Rexx (1988-1993)\
 Day 8: BASH (1990-present)\
 Day 9: Ada (1990-2007)\
-Day 10: C++ (1991-2005,2020-present)\
-Day 11: Tcl(?) (~1995) -- Not complete
+Day 10: C++ (1991-2005, 2020-present)\
+Day 11: Tcl(?) (~1995) -- Not complete\
+Day 12: Java (1998-2007, 2015-present)
