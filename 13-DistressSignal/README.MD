@@ -47,7 +47,7 @@ And its dynamic typing lets me store both `NSNumber` and `NSArray` objects toget
 
 ### Tools
 
-[Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
+[Clang](https://clang.llvm.org/)
 
 ### Running
 
