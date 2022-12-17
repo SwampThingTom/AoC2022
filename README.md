@@ -20,4 +20,6 @@ Day 11: Tcl(?) (~1995) -- Not complete\
 Day 12: Java (1998-2007, 2015-present)\
 Day 13: Objective-C (2007-present)\
 Day 14: C# (2007-present)\
-Day 15: JavaScript (2010-present)
+Day 15: JavaScript (2010-present)\
+Day 16: Scala(?) (2014) -- Not complete\
+Day 17: Groovy (2014-present)
