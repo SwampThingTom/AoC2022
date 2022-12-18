@@ -4,6 +4,7 @@
 // https://adventofcode.com/2022/day/17
 
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
 class PyroclasticFlow {
 
@@ -84,14 +85,14 @@ class PyroclasticFlow {
 
     class Chamber {
         Set<Point> blocks = []
-        int height() { blocks.max { it.y }?.y+1 ?: 0 }
+        int height() { (blocks.max { it.y }?.y ?: 0) + 1 }
         Rock rock = new Rock(0, new Point(2, 3))
-        int numRocks = 0
+        long numRocks = 0
 
         void addRock() {
             blocks.addAll rock.blocks()
             numRocks++
-            rock = new Rock(numRocks % 5, new Point(2, height()+3))
+            rock = new Rock((int)(numRocks % 5), new Point(2, height()+3))
         }
 
         boolean canFit(String dir) {
@@ -106,6 +107,33 @@ class PyroclasticFlow {
             }
             true
         }
+
+        List<Integer> relativeColumnHeights() {
+            def height = this.height()
+            (0..6).collect { x -> height - (blocks.findAll { it.x == x }.max { it.y }?.y ?: 0) }
+        }
+    }
+
+    @EqualsAndHashCode
+    class GameState {
+        int moveIndex
+        int rockShape
+        List<Integer> columnHeights
+    }
+
+    @EqualsAndHashCode
+    @ToString
+    class GameResults {
+        long numRocks
+        int height
+    }
+
+    def gameHash(int moveIndex, Chamber chamber) {
+        def state = new GameState(
+            moveIndex: moveIndex,
+            rockShape: chamber.rock.shape,
+            columnHeights: chamber.relativeColumnHeights())
+        state.hashCode()
     }
 
     def readInput() {
@@ -117,14 +145,19 @@ class PyroclasticFlow {
         if (false) { println str }
     }
 
-    def solve(int numRocksToAdd) {
+    def solve(long numRocksToAdd, boolean detectCycles = false) {
         def moves = readInput()
         def moveIndex = 0
         def chamber = new Chamber()
 
+        def foundCycle = !detectCycles
+        def cyclesHeight = 0
+        def gamesSeen = new HashMap<Integer, GameResults>()
+
         while (chamber.numRocks < numRocksToAdd) {
             def dir = moves[moveIndex++]
             moveIndex %= moves.length()
+            
             if (chamber.canFit(dir)) {
                 chamber.rock.move dir
                 debugPrint "Moved $dir"
@@ -136,13 +169,32 @@ class PyroclasticFlow {
                 chamber.addRock()
                 debugPrint "Added rock $chamber.numRocks. New height is ${chamber.height()}"
             }
+
+            if (!foundCycle) {
+                def hash = gameHash(moveIndex, chamber)
+                def prevResults = gamesSeen[hash]
+                if (prevResults != null) {
+                    foundCycle = true
+                    
+                    def rocksLeft = numRocksToAdd - chamber.numRocks
+                    def rocksPerCycle = chamber.numRocks - prevResults.numRocks
+                    def heightPerCycle = chamber.height() - prevResults.height
+                    def numCycles = rocksLeft.intdiv(rocksPerCycle)
+                    debugPrint "Skipping $numCycles cycles with $rocksPerCycle rocks and $heightPerCycle height."
+                    
+                    chamber.numRocks += numCycles * rocksPerCycle
+                    cyclesHeight = numCycles * heightPerCycle
+                } else {
+                    gamesSeen[hash] = new GameResults(numRocks: chamber.numRocks, height: chamber.height())
+                }
+            }            
         }
-        chamber.height()
+        chamber.height() + cyclesHeight
     }
 
     static void main(String[] args) {
         def tetris = new PyroclasticFlow()
-        println "Part 1: ${tetris.solve 2022}"
+        println "Part 1: ${tetris.solve(2022)}"
+        println "Part 2: ${tetris.solve(1_000_000_000_000, true)}"
     }
 }
-

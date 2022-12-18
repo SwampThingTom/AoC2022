@@ -25,6 +25,10 @@ After finishing part 1 pretty quickly, I realized that there was no way I was go
 A quick look at reddit showed that people were using dynamic programming to find cycles.
 Started working on it but wasn't able to complete it before having to do other things.
 
+Update: I finished part 2.
+Even with cycle detection, it still takes 30 seconds to run.
+But it works.
+
 Overall, I was happy with Groovy.
 I'm a little suprised it isn't used more outside of CI/CD and testing.
 It provides some nice improvements over Java, including type inference, dynamic dispatch, treating all types as objects, an `==` operator that actually checks for equality, and a more concise syntax.
