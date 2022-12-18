@@ -1,5 +1,8 @@
 #!/usr/bin/env groovy
 
+// Pyroclastic Flow
+// https://adventofcode.com/2022/day/17
+
 import groovy.transform.EqualsAndHashCode
 
 class PyroclasticFlow {
