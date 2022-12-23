@@ -3,7 +3,7 @@
 
 ### Programming Language 
 
-[Dart](https://en.wikipedia.org/wiki/Dart) was designed at Google by Lars Bak, who also led the development of Chrome's V8 JavaScript engine, and Lasper Kund.
+[Dart](https://en.wikipedia.org/wiki/Dart_(programming_language)) was designed at Google by Lars Bak, who also led the development of Chrome's V8 JavaScript engine, and Lasper Kund.
 It was initially released in 2013.
 The original plan was to include a Dart VM in Chrome which led to criticism of Google for fragmenting web development.
 That plan was dropped and Google instead focused on compiling Dart to JavaScript for use on the web.
