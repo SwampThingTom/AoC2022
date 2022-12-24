@@ -24,6 +24,7 @@ struct Valley {
     end: Point,
     walls: HashSet<Point>,
     blizzards: Vec<Blizzard>,
+    map_cache: HashMap<i32, HashSet<Point>>,
 }
 
 impl Valley {
@@ -48,7 +49,7 @@ impl Valley {
     }
 
     // Returns the minimum end time to traverse the valley from the start point to the end point.
-    fn find_shortest_path_time(&self, start: Point, end: Point, start_time: i32) -> i32 {
+    fn find_shortest_path_time(&mut self, start: Point, end: Point, start_time: i32) -> i32 {
         let mut visited: HashSet<(i32, Point)> = HashSet::new();
         let mut open_list = VecDeque::from([(start_time, start)]);
         while !open_list.is_empty() {
@@ -69,9 +70,14 @@ impl Valley {
     }
 
     // Returns a set of points that are occupied by walls or blizzards at the given time.
-    fn map_at_time(&self, time: i32) -> HashSet<Point> {
+    fn map_at_time(&mut self, time: i32) -> HashSet<Point> {
         let b_width = self.width - 2;
         let b_height = self.height - 2;
+        let normalized_time = time % (b_width * b_height);
+        if let Some(cached_points) = self.map_cache.get(&normalized_time) {
+            return cached_points.clone();
+        }
+
         let mut points: HashSet<Point> = self.walls.clone();
         for b in &self.blizzards {
             let x = modulo(b.pos.0 - 1 + b.offset.0 * time, b_width) + 1;
@@ -80,10 +86,11 @@ impl Valley {
             assert!(y > 0 && y < self.height - 1, "y out of range");
             points.insert(Point(x, y));
         }
+        self.map_cache.insert(normalized_time, points.clone());
         points
     }
 
-    // Returns a list of points that neighbor the giveen cell and are not blocked.
+    // Returns a list of points that neighbor the given cell and are not blocked.
     fn neighbors(&self, cell: Point, map: HashSet<Point>) -> Vec<Point> {
         let mut moves: Vec<Point> = Vec::new();
         for (dx, dy) in [(0, 1), (1, 0), (-1, 0), (0, -1), (0, 0)] {
@@ -117,6 +124,7 @@ fn make_valley(lines: Vec<String>) -> Valley {
         end,
         walls: make_walls(width, height, start, end),
         blizzards: make_blizzards(lines),
+        map_cache: HashMap::new(),
     }
 }
 
@@ -168,8 +176,12 @@ fn read_input() -> Vec<String> {
 
 fn main() {
     let lines = read_input();
-    let valley = make_valley(lines);
+    let mut valley = make_valley(lines);
 
     let part1 = valley.find_shortest_path_time(valley.start, valley.end, 0);
     println!("Part 1: {}", part1);
+
+    let time_back = valley.find_shortest_path_time(valley.end, valley.start, part1);
+    let part2 = valley.find_shortest_path_time(valley.start, valley.end, time_back);
+    println!("Part 2: {}", part2);
 }
