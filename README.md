@@ -28,4 +28,5 @@ Day 19: Swift (2014-present)\
 Day 20: TypeScript (2019-present)\
 Day 21: Kotlin (2020-present)\
 Day 22: Python (2020-present)\
-Day 23: Dart (2021-present)
+Day 23: Dart (2021-present)\
+Day 24: Rust (2022-present)
