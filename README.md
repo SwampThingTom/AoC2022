@@ -16,18 +16,18 @@ Day 7: Rexx (1988-1993)\
 Day 8: BASH (1990-present)\
 Day 9: Ada (1990-2007)\
 Day 10: C++ (1991-2005, 2020-present)\
-Day 11: Tcl(?) (~1995) -- Not complete\
+Day 11: Tcl (~1995) -- part 1 only\
 Day 12: Java (1998-2007, 2015-present)\
 Day 13: Objective-C (2007-present)\
 Day 14: C# (2007-present)\
 Day 15: JavaScript (2010-present)\
-Day 16: Scala(?) (2014) -- Not complete\
+Day 16: Scala (2014) -- not complete\
 Day 17: Groovy (2014-present)\
 Day 18: Ruby (2015-present)\
 Day 19: Swift (2014-present)\
 Day 20: TypeScript (2019-present)\
 Day 21: Kotlin (2020-present)\
-Day 22: Python (2020-present)\
+Day 22: Python (2020-present) -- part 1 only\
 Day 23: Dart (2021-present)\
 Day 24: Rust (2022-present)\
 Day 25: SAIL (2014-present)
