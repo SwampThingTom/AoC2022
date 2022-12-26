@@ -30,6 +30,16 @@ After finally getting the code to parse the input and print an array of `monster
 I'll come back to this on a future day.
 Whether I will continue trying to do it in Tcl or choose another language, we shall see.
 
+**Updated Dec 26 2022:**
+Getting part 1 working turned out to not be so bad once I came back to it.
+Once I realized that I can't think of variables as references to objects (memory) but instead as keys in a scoped dictionary, it became easier to proceed.
+Nothing is passed by reference and it isn't possible to have multiple references to the same underlying value.
+This is conceptually simple and helps newcomers avoid problems with setting a variable's value and being surprised that it also changed the value of a different variable referencing the same memory.
+But it makes it more difficult for those of us who want to write functions that can update referenced variables.
+
+Tcl's scoping rules are also a bit odd compared to other programming languages.
+The programmer has to explicitly map local variables to variables in outer scopes, and even keep track of the nesting level. 
+
 ### Tools
 
 [Tcl](https://www.tcl-lang.org/)

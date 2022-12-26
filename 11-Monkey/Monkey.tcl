@@ -3,6 +3,13 @@
 # Monkey in the Middle
 # https://adventofcode.com/2022/day/11
 
+proc debugPrint {msg} {
+    # set to 1 to show debug output
+    if { 0 } {
+        puts $msg
+    }
+}
+
 proc readInput {} {
     set f [open "input.txt" r]
     set lines [split [string trim [read $f]] "\n"]
@@ -12,25 +19,25 @@ proc readInput {} {
 
 proc showMonkey {monkey} {
     upvar $monkey m
-    puts [dict get $m items]
-    puts [dict get $m operation]
-    puts [dict get $m test]
-    puts [dict get $m ifTrue]
-    puts [dict get $m ifFalse]
+    debugPrint [dict get $m items]
+    debugPrint [dict get $m operation]
+    debugPrint [dict get $m test]
+    debugPrint [dict get $m ifTrue]
+    debugPrint [dict get $m ifFalse]
+    debugPrint [dict get $m inspected]
 }
 
 proc makeMonkey {items operation test ifTrue ifFalse} {
-    return [dict create items $items operation $operation test $test ifTrue $ifTrue ifFalse $ifFalse]
+    return [dict create items $items operation $operation test $test ifTrue $ifTrue ifFalse $ifFalse inspected 0]
 }
 
-# dict set monkeys 0 [makeMonkey [list 79 98] [list * old 19] 23 2 3]
-# dict set monkeys 1 [makeMonkey [list 54 65 75 74] [list + old 6] 19 2 0]
-
-# for {set i 0} {$i < [dict size $monkeys]} {incr i} {
-#     puts "Monkey #$i"
-#     set monkey [dict get $monkeys $i]
-#     showMonkey monkey
-# }
+proc throwTo {target item} {
+    upvar $target t
+    set newItems [dict get $t items]
+    lappend newItems $item
+    dict set t items $newItems
+    return $t
+}
 
 # Parse input into monkey dictionaries.
 set i 0
@@ -43,35 +50,29 @@ foreach line [readInput] {
             set itemsStr [regsub -all { } [join [lrange $tokens 4 end]] ""]
             set items [split $itemsStr ","]
             lappend monkeyArgs $items
-            # puts "  Items: $items"
           }
         2 {
             set operation [lrange $tokens 5 end]
-            lappend monkeyArgs $operation
-            # puts "  Operation: $operation"
+            lappend monkeyArgs [string map {old "$old"} $operation]
           }
         3 {
             set test [lindex $tokens end]
             lappend monkeyArgs $test
-            # puts "  Test: $test"
           }
         4 {
             set ifTrue [lindex $tokens end]
             lappend monkeyArgs $ifTrue
-            # puts "  If True: $ifTrue"
           }
         5 {
             set ifFalse [lindex $tokens end]
             lappend monkeyArgs $ifFalse
-            # puts "  If False: $ifFalse"
           }
     }
     set i [expr $i + 1]
     if {$i == 6} {
         set monkey [makeMonkey {*}$monkeyArgs]
         dict set monkeys $monkeyIndex $monkey
-        set monkeyIndex [expr $monkeyIndex + 1]
- 
+        set monkeyIndex [expr $monkeyIndex + 1] 
     }
     if {$i == 7} {
         set i 0
@@ -79,9 +80,65 @@ foreach line [readInput] {
     }
 }
 
-dict for {index monkey} $monkeys {
-    puts "Monkey #$index"
-    showMonkey monkey
+for {set i 0} {$i < 20} {incr i} { 
+    foreach index [dict keys $monkeys] {
+        set monkey [dict get $monkeys $index]
+        debugPrint "Monkey #$index"
 
-    # TODO: Process a monkey
+        # Take turn for monkey.
+        set items [dict get $monkey items]
+        set inspected [dict get $monkey inspected]
+        foreach old $items {
+            debugPrint "  Inspect item with worry level of $old."
+            set inspected [expr $inspected + 1]
+           
+            set new [expr [dict get $monkey operation]]
+            debugPrint "    New worry level is $new."
+
+            set new [expr $new / 3]
+            debugPrint "    Monkey bored, worry level is now $new."
+            
+            if { [expr $new % [dict get $monkey test]] == 0 } {
+                set targetIndex [dict get $monkey ifTrue]
+                debugPrint "    Throwing to monkey $targetIndex"
+
+                set target [dict get $monkeys $targetIndex]
+                dict set monkeys $targetIndex [throwTo target $new]
+            } else {
+                set targetIndex [dict get $monkey ifFalse]
+                debugPrint "    Throwing to monkey $targetIndex"
+                
+                set target [dict get $monkeys $targetIndex]
+                dict set monkeys $targetIndex [throwTo target $new]
+            }
+        }
+
+        dict set monkey inspected $inspected
+        dict set monkey items {}
+        dict set monkeys $index $monkey
+
+        debugPrint ""
+    }
+
+    dict for {index monkey} $monkeys {
+        set items [dict get $monkey items]
+        set inspected [dict get $monkey inspected]
+        debugPrint "Monkey #$index ($inspected): $items"
+    }
+    debugPrint ""
 }
+
+set max1 0
+set max2 0
+dict for {index monkey} $monkeys {
+    set inspected [dict get $monkey inspected]
+    if { $inspected > $max1 } {
+        set max2 $max1
+        set max1 $inspected
+    } elseif { $inspected > $max2 } {
+        set max2 $inspected
+    }
+}
+
+set part1 [expr $max1 * $max2]
+puts "Part 1: $part1"
