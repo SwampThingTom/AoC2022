@@ -2,4 +2,4 @@ xcuserdata
 .DS_Store
 build
 *.o
-a.out
+input.txt
