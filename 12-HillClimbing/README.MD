@@ -51,6 +51,8 @@ smh
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-java HillClimbing.java
+make run
 ```

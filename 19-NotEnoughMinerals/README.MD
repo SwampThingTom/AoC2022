@@ -47,6 +47,8 @@ But it solves the problem and got me 2 stars, so I'm good with it for now.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./NotEnoughMinerals.swift
+make run
 ```

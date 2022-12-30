@@ -31,6 +31,8 @@ I'm pretty happy with my solution.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-make && ./build/CathodeRayTube
+make run
 ```

@@ -33,6 +33,8 @@ As much as I loved Pascal at the time, and still appreciate its strong typing an
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-make && build/RucksackReorg
+make run
 ```

@@ -43,6 +43,8 @@ Beyond that it was just slow to implement because I had to remember (google) syn
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-gnatmake RopeBridge.adb && ./ropebridge
+make run
 ```

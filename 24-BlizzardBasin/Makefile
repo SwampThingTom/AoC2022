@@ -1,25 +1,22 @@
 YEAR=2022
-DAY=4
-APP=CampCleanup
-SRC=$(APP).c
+DAY=24
+APP=BlizzardBasin
+SRC=$(APP).rs
 SESSION=~/.aoc-session
 
 all: run
 
-run: input.txt build/$(APP)
-	build/$(APP)
+run: input.txt $(APP)
+	./$(APP)
 
 clean:
-	rm -rf build input.txt
+	rm -rf input.txt $(APP)
 
 input.txt:
 	@test -s $(SESSION) || { echo "Advent of Code session file not found ($(SESSION))."; exit 1; }
 	curl --cookie "session=$$(cat $(SESSION))" "https://adventofcode.com/$(YEAR)/day/$(DAY)/input" -o $@
 
-build:
-	mkdir -p $@
-
-build/$(APP): build $(SRC)
-	cc -o $@ -Wno-deprecated-declarations $(SRC)
+$(APP): $(SRC)
+	rustc $(SRC)
 
 .PHONY: all run clean

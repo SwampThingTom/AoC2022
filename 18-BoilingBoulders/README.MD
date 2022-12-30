@@ -35,6 +35,8 @@ And Ruby is an object-oriented language at heart.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./BoilingBoulders.rb
+make run
 ```

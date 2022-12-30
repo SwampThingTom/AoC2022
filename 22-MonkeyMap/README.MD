@@ -37,6 +37,8 @@ TBD
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./MonkeyMap.py
+make run
 ```

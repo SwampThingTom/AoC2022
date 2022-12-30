@@ -32,6 +32,8 @@ But I think I'd have to spend a lot of time programming in Scala to really start
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-scala ProboscideaVolcanium.scala
+make run
 ```

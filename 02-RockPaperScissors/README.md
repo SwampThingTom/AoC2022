@@ -48,19 +48,13 @@ Install the tools mentioned above.
 I recommend using a pre-built [installer](https://vice-emu.sourceforge.io/index.html#download) from their SourceForge repository.
 Don't forget to add it to your PATH if you want to run my scripts from the command line.
 
-Next, download your input file as `input.txt` and convert it to `input.asm` using:
+To automatically fetch your input file and run the program, enter:
 
 ```
-scripts/convert_input.py
+make run
 ```
 
-Finally, to build and run the program, type:
-
-```
-scripts/runc64 RockPaperScissors
-```
-
-That will use Acme to assemble the source, convert the resulting object code to a d64 file, and open it in VICE to run it.
+That will fetch and convert your input file, use Acme to assemble the source, convert the resulting object code to a d64 file, and open it in VICE to run it.
 
 ### Screenshot
 

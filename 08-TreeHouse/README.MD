@@ -38,6 +38,8 @@ For the kinds of problems I use scripting languages for, I prefer Rexx's syntax 
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./TreeHouse.sh
+make run
 ```

@@ -56,6 +56,8 @@ Kind of annoying and hacky but it works.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./BeaconExclusion.js
+make run
 ```

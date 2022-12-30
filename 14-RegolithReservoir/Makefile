@@ -1,12 +1,25 @@
-all: build build/RegolithReservoir
+YEAR=2022
+DAY=14
+APP=RegolithReservoir
+SRC=$(APP).cs
+SESSION=~/.aoc-session
 
-.PHONY: all
+all: run
+
+run: input.txt build/$(APP)
+	mono build/$(APP)
+
+clean:
+	rm -rf build input.txt
+
+input.txt:
+	test -s $(SESSION) || { echo "Advent of Code session file not found ($(SESSION))."; exit 1; }
+	curl --cookie "session=$$(cat $(SESSION))" "https://adventofcode.com/$(YEAR)/day/$(DAY)/input" -o $@
 
 build:
 	mkdir -p $@
 
-build/RegolithReservoir: RegolithReservoir.cs
-	mcs -out:$@ RegolithReservoir.cs
+build/$(APP): build $(SRC)
+	mcs -out:$@ $(SRC)
 
-clean:
-	rm -f build/*
+.PHONY: all run clean

@@ -45,6 +45,8 @@ My experience with Objective-C made it comfortable to program in, despite the nu
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./TuningTrouble.st
+make run
 ```

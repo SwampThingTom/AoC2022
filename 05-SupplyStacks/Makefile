@@ -1,25 +1,21 @@
 YEAR=2022
-DAY=4
-APP=CampCleanup
-SRC=$(APP).c
+DAY=5
+APP=SupplyStacks.lisp
 SESSION=~/.aoc-session
 
 all: run
 
-run: input.txt build/$(APP)
-	build/$(APP)
+run: input-moves.txt
+	./$(APP)
 
 clean:
-	rm -rf build input.txt
+	rm -f input.txt input-moves.txt
+
+input-moves.txt: input.txt
+	scripts/convert_input.py
 
 input.txt:
 	@test -s $(SESSION) || { echo "Advent of Code session file not found ($(SESSION))."; exit 1; }
 	curl --cookie "session=$$(cat $(SESSION))" "https://adventofcode.com/$(YEAR)/day/$(DAY)/input" -o $@
-
-build:
-	mkdir -p $@
-
-build/$(APP): build $(SRC)
-	cc -o $@ -Wno-deprecated-declarations $(SRC)
 
 .PHONY: all run clean

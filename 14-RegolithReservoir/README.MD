@@ -52,6 +52,8 @@ And I think it has a lot of the advantages of Python but without some of the klu
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-make && mono build/RegolithReservoir.exe
+make run
 ```

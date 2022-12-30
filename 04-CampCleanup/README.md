@@ -39,6 +39,8 @@ It does make me miss the ease of quickly reading and parsing files into a list t
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-make && build/CampCleanup
+make run
 ```

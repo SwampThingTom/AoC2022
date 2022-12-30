@@ -49,6 +49,8 @@ This made it easy to inject the operations used to reduce worry for each part.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./Monkey.tcl
+make run
 ```

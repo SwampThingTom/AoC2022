@@ -37,6 +37,8 @@ Would be interesting to compare the experience to React Native and native mobile
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./UnstableDiffusion.dart
+make run
 ```

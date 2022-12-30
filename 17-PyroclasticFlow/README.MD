@@ -39,6 +39,8 @@ It provides some nice improvements over Java, including type inference, dynamic 
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./PyroclasticFlow.groovy
+make run
 ```

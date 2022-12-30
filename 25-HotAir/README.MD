@@ -22,6 +22,9 @@ After summing all of the decimal values, it converts it back to snafu using a re
 
 Because Appian's interface designer is GUI-based and not intended to be written in text files (in some ways similar to SmallTalk environments like Pharo), I manually copied the source of each "rule" (function) into a single text file, [aoc_fullOfHotAir.sail](aoc_fullOfHotAir.sail).
 
+I also wrote a script, `scripts/convert_input.py`, that converts the puzzle input from `input.txt` into a SAIL list that can be copied and pasted into an expression rule.
+It saves the converted input as `input.sail`.
+
 ### Tools
 
 [Appian SAIL](https://community.appian.com/)

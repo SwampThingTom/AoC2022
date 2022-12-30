@@ -48,6 +48,8 @@ But Rust does handle the case of multiple owners of a mutable object accessing i
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-rustc BlizzardBasin.rs && ./BlizzardBasin
+make run
 ```

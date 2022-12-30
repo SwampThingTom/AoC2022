@@ -38,6 +38,8 @@ But the lack of better data structure support and the inability to pass variable
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./NoSpace.rexx
+make run
 ```

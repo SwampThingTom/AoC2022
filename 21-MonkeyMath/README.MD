@@ -39,6 +39,8 @@ I like writing all of my AoC solutions in VSCode!
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-kotlinc MonkeyMath.kt -include-runtime -d MonkeyMath.jar && java -jar MonkeyMath.jar
+make run
 ```

@@ -51,6 +51,8 @@ And its dynamic typing lets me store both `NSNumber` and `NSArray` objects toget
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-make && ./build/DistressSignal
+make run
 ```

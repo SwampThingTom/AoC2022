@@ -31,10 +31,10 @@ I certainly wouldn't reach for BASIC as my first tool for most programming proje
 
 ### Running
 
-After installing Chipmunk BASIC and ensuring it is in your PATH, simply run:
+To automatically fetch your input file and run the program, enter:
 
 ```
-./CalorieCounting.bas
+make run
 ```
 
 After it runs, you'll have to `quit` out of Chipmunk BASIC's REPL.

@@ -37,6 +37,8 @@ It was much faster to get started than setting up an npm environment to use Type
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./GrovePositioning.ts
+make run
 ```

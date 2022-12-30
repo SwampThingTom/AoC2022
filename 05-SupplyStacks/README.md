@@ -44,6 +44,8 @@ Maybe.
 
 ### Running
 
+To automatically fetch your input file and run the program, enter:
+
 ```
-./SupplyStacks.lisp
+make run
 ```
