@@ -12,7 +12,7 @@ target_dir="$day-TBD"
 
 day_num=`expr $day + 0`
 mkdir $target_dir
-cp template/README.MD $target_dir
+cp template/README.md $target_dir
 sed -i '' "s/<day>/$day_num/g" $target_dir/README.md
 sed -i '' "s/<language>/$language/g" $target_dir/README.md
 touch $target_dir/input.txt
