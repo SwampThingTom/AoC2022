@@ -63,8 +63,8 @@ object ProboscideaVolcanium {
             return maxPressureReleased
         }
         
-        val newBranches = collection.mutable.ListBuffer[State]()
-        newBranches ++= states.drop(1)
+        val newStates = collection.mutable.ListBuffer[State]()
+        newStates ++= states.drop(1)
 
         val (path, pressures, opened) = states.head
         val valve = path.lastOption.getOrElse("AA")
@@ -81,13 +81,13 @@ object ProboscideaVolcanium {
                 // Extending the list to 30 items and summing the result provides the total pressure released for the path.
                 val pathPressure = List.fill(pathToNext.length)(currentlyReleasing)
                 val newPressures = pressures.toList ::: pathPressure ::: List(valves(next).flow + currentlyReleasing)
-                val newBranch: State = (newPath, newPressures, opened + next)
-                newBranches += newBranch
+                val newState: State = (newPath, newPressures, opened + next)
+                newStates += newState
             }
         }
 
         val totalReleased = sumReleasedPressure(pressures, currentlyReleasing)
-        openValves(valves, paths, priority, newBranches.toList, max(maxPressureReleased, totalReleased))
+        openValves(valves, paths, priority, newStates.toList, max(maxPressureReleased, totalReleased))
     }
 
     def sumReleasedPressure(releasedPerTurn: Seq[Int], current: Int): Int = {
