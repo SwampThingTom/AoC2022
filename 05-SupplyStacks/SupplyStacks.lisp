@@ -74,4 +74,4 @@
     
 (let ((stacks (initial-stacks))
       (moves (mapcar 'parse-move (read-file "input-moves.txt"))))
-    (format t "Part 1: ~{~A~}~%" (solve-part-2 stacks moves)))
+    (format t "Part 2: ~{~A~}~%" (solve-part-2 stacks moves)))
