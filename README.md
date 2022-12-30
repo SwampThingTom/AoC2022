@@ -31,3 +31,13 @@ The years after each language are approximately when I was actively using it.
 [Day 23](23-UnstableDiffusion): Dart (2021-present)\
 [Day 24](24-BlizzardBasin): Rust (2022-present)\
 [Day 25](25-HotAir): SAIL (2014-present)
+
+## Running
+
+To run these, you'll need to download your input files.
+These should be saved in a file named `input.txt` in the same directory as the puzzle solution.
+
+Each day's folder has a makefile that attempts to download that day's input for you.
+In order for this to work, you have to have a file named `.aoc-session` in your home directory.
+That file should contain the value of the session cookie used by AoC to authenticate you.
+See [this](https://github.com/wimglenn/advent-of-code-wim/issues/1) for a quick explanation of how to get the session cookie for your account.

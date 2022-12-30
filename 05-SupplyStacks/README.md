@@ -44,7 +44,11 @@ Maybe.
 
 ### Running
 
-To automatically fetch your input file and run the program, enter:
+Because I didn't implement parsing of the initial stack configuration, the code as is won't work for any input but mine.
+Or, I guess, any input that doesn't happen to have the exact same starting stack configuration as mine.
+So in order to use custom input with a different stack configuration, you'll have to edit the `initial-stacks` function.
+
+Once you've done that, you can fetch your input file and run the program, by entering:
 
 ```
 make run
