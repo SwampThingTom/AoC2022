@@ -196,6 +196,7 @@ function solve(encrypted: number[], mixCount: number = 1): number {
 const encrypted: number[] = Deno
     .readTextFileSync('input.txt')
     .split(("\n"))
+    .filter((x: string) => x)
     .map((x: string) => parseInt(x))
 
 const part1 = solve(encrypted)

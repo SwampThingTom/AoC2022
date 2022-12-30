@@ -166,7 +166,7 @@ func readInput(named name: String = "input.txt") -> [String] {
         print("Current directory: \(currentDirectoryURL)")
         return []
     }
-    return content.components(separatedBy: .newlines)
+    return content.components(separatedBy: .newlines).filter { $0 != "" }
 }
 
 func parse(_ line: String) -> [Robot] {

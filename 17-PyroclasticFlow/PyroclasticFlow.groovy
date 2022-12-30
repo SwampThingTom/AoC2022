@@ -138,7 +138,7 @@ class PyroclasticFlow {
 
     def readInput() {
         File file = new File("input.txt")
-        file.text
+        file.text.trim()
     }
 
     void debugPrint(String str) {
